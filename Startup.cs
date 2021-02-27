@@ -22,7 +22,7 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<backendContext>(opt => opt.UseInMemoryDatabase("backend"));
+            services.AddDbContext<BackendContext>(opt => opt.UseInMemoryDatabase("backend"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

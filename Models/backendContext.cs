@@ -2,13 +2,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models
 {
-    public class backendContext : DbContext
+    public class BackendContext : DbContext
     {
-        public backendContext(DbContextOptions<backendContext> options)
+        public BackendContext(DbContextOptions<BackendContext> options)
             : base(options)
         {
         }
 
-        public DbSet<backendItem> backendItems { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
