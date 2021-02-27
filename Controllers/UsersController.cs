@@ -29,13 +29,22 @@ namespace backend.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
+        public async Task<ActionResult<User>> CreateUser([FromBody] User newUser)
         {
             try{
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
 
-                return CreatedAtAction("CreateUser", new {Id = user.Id}, user);
+                var duplicatedUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == newUser.Email);
+
+                if(duplicatedUser == null){
+
+                    _context.Users.Add(newUser);
+                    await _context.SaveChangesAsync();
+
+                     return CreatedAtAction("CreateUser", new {Id = newUser.Id}, newUser);
+                }
+                else
+                    return BadRequest("Email already registered!");
+                
             }
             catch (System.Exception){
                 return BadRequest("Something went wrong when creating user!");

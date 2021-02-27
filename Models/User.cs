@@ -1,10 +1,26 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace backend.Models{
     public class User{
+        [Key]
         public long Id {get; set;}
-        public string name {get; set;}
-        public string username {get; set;}
-        public string email {get; set;}
-        public string password {get; set;}
+
+        
+        [Required(ErrorMessage = "Required field")]
+        [MaxLength(100)]
+        [MinLength(3)]
+        public string Name {get; set;}
+
+        [MaxLength(80)]
+        public string UserName {get; set;}
+        
+        [Required]
+        [MaxLength(200)]
+        public string Email {get; set;}
+
+        [Required]
+        [MinLength(6)]
+        public string Password {get; set;}
     }
 
 }
