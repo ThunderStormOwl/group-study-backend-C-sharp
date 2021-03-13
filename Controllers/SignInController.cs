@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
+using System.Collections.Generic;
 
 namespace backend.Controllers
 {
@@ -29,7 +30,11 @@ namespace backend.Controllers
                     return Ok( new {accesToken = "123456789"});
                 }
                 else
-                    return BadRequest("Email or password not registered");
+                    return BadRequest(new {
+                        errors = new {
+                            EmailOrPassword = new List<string> {"Email or password not found!"}
+                        }
+                    });
                 
             }
             catch (System.Exception){
